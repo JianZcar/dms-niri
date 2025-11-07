@@ -1,10 +1,4 @@
 ARG FEDORA_VERSION=43
-ARG ARCH=x86_64
-ARG KERNEL_FLAVOR=bazzite
-ARG BASE_IMAGE_NAME=silverblue
-
-FROM ghcr.io/ublue-os/akmods:${KERNEL_FLAVOR}-${FEDORA_VERSION}-${ARCH} AS akmods
-FROM ghcr.io/ublue-os/akmods-nvidia-open:${KERNEL_FLAVOR}-${FEDORA_VERSION}-${ARCH} AS nvidia
 
 FROM scratch AS ctx
 COPY build_files /
@@ -24,74 +18,56 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    --mount=type=bind,from=akmods,src=/kernel-rpms,dst=/tmp/kernel-rpms \
-    --mount=type=bind,from=akmods,src=/rpms,dst=/tmp/akmods-rpms \
-    /ctx/01-kernel.sh && \
+    /ctx/01-de.sh && \
     /ctx/helper/cleanup.sh
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    --mount=type=bind,from=nvidia,src=/kernel-rpms,dst=/tmp/kernel-rpms \
-    --mount=type=bind,from=nvidia,src=/rpms,dst=/tmp/akmods-rpms \
-    /ctx/02-nvidia.sh && \
+    /ctx/02-packages.sh && \
     /ctx/helper/cleanup.sh
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/03-de.sh && \
+    /ctx/03-config.sh && \
     /ctx/helper/cleanup.sh
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/04-packages.sh && \
+    /ctx/04-services.sh && \
     /ctx/helper/cleanup.sh
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/05-config.sh && \
+    /ctx/05-cleanup-repos.sh && \
     /ctx/helper/cleanup.sh
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/06-services.sh && \
+    /ctx/06-build-initramfs.sh && \
     /ctx/helper/cleanup.sh
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/07-cleanup-repos.sh && \
+    /ctx/07-image-info.sh && \
     /ctx/helper/cleanup.sh
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/08-build-initramfs.sh && \
-    /ctx/helper/cleanup.sh
-
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/09-image-info.sh && \
-    /ctx/helper/cleanup.sh
-
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache \
-    --mount=type=cache,dst=/var/log \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/10-finalize.sh && \
+    /ctx/08-finalize.sh && \
     /ctx/helper/cleanup.sh
 
 ### LINTING
