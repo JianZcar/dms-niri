@@ -7,6 +7,8 @@ set -ouex pipefail
 RELEASE="$(rpm -E %fedora)"
 mkdir -p /var/roothome
 
+dnf5 -y install dnf5-plugins
+
 COPRS=(
     ublue-os/staging
 
