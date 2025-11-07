@@ -5,7 +5,7 @@ echo "::group:: ===$(basename "$0")==="
 set -ouex pipefail
 
 RELEASE="$(rpm -E %fedora)"
-kdir -p /var/roothome
+mkdir -p /var/roothome
 
 COPRS=(
     ublue-os/staging
