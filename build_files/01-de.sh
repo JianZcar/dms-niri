@@ -8,3 +8,5 @@ shopt -s nullglob
 
 dnf install niri --setopt=install_weak_deps=False
 dnf install quickshell xwayland-satellite dms accountsservice dms-greeter
+
+echo "::endgroup::"
