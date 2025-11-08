@@ -6,12 +6,6 @@ set -ouex pipefail
 
 services=(
     podman.socket
-    greetd
-)
-
-user_services=(
-    opentabletdriver.service
-    dms.service
 )
 
 disable_services=(
@@ -34,6 +28,6 @@ user_services=(
 systemctl enable "${services[@]}"
 # systemctl disable "${disable_services[@]}"
 systemctl mask "${mask_services[@]}"
-systemctl --global enable "${user_services[@]}"
+# systemctl --global enable "${user_services[@]}"
 
 echo "::endgroup::"

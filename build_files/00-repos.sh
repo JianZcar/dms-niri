@@ -2,23 +2,16 @@
 
 echo "::group:: ===$(basename "$0")==="
 
-set -ouex pipefail
+set -euxo pipefail
 
-RELEASE="$(rpm -E %fedora)"
+# Create directory
 mkdir -p /var/roothome
 
 dnf5 -y install dnf5-plugins
 
 COPRS=(
-    ublue-os/staging
-
     trixieua/morewaita-icon-theme
     che/nerd-fonts
-    yalter/niri
-    ulysg/xwayland-satellite
-    avengemedia/dms
-    avengemedia/danklinux
-    errornointernet/quickshell
 )
 
 for COPR in "${COPRS[@]}"; do
@@ -26,5 +19,7 @@ for COPR in "${COPRS[@]}"; do
     dnf5 -y copr enable "$COPR"
 done
 
-dnf5 -y config-manager setopt "*".exclude="*.aarch64"
-dnf5 -y config-manager setopt "*fedora*".priority=1 "*fedora*".exclude="kernel-core-* kernel-modules-* kernel-uki-virt-*"
+# Install RPMFusion repos
+dnf5 -y install \
+    "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
+    "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"

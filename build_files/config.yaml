@@ -1,180 +1,151 @@
-- path: /usr/share/libinput/zz1-00-zena.quirks
+- gschema:
+    id: org.gnome.shell
+    filename: zz0-00-extensions.gschema.override
+    settings:
+      enabled-extensions:
+        - accent-directories@taiwbi.com
+        - appindicatorsupport@rgcjonas.gmail.com
+        - blur-my-shell@aunetx
+        - caffeine@patapon.info
+        - disable-workspace-switcher-overlay@cleardevice
+        - gnome-fuzzy-app-search@gnome-shell-extensions.Czarlie.gitlab.com
+        - hotedge@jonathan.jdoda.ca
+        - ideapad@laurento.frittella
+        - just-perfection-desktop@just-perfection
+        - splashindicator@ochi12.github.com
+        - wireless-hid@chlumskyvaclav.gmail.com
+        - window-centering@hnjjhmtr27
+        - zena-shell@jianzcar.github
+
+- gschema:
+    id: org.gnome.desktop.interface
+    filename: zz0-01-desktop.gschema.override
+    settings:
+      accent-color: 'slate'
+      color-scheme: 'prefer-light'
+      gtk-theme: 'adw-gtk3'
+      clock-format: '12h'
+      clock-show-seconds: true
+      enable-hot-corners: false
+      monospace-font-name: 'JetBrains Mono 11'
+
+- gschema:
+    id: org.gnome.desktop.sound
+    filename: zz0-02-sound.gschema.override
+    settings:
+      allow-volume-above-100-percent: true
+
+- gschema:
+    id: org.gnome.mutter
+    filename: zz0-03-mutter.gschema.override
+    settings:
+      center-new-windows: false
+
+- gschema:
+    id: org.gnome.desktop.peripherals.mouse
+    filename: zz0-04-mouse.gschema.override
+    settings:
+      accel-profile: 'flat'
+
+- gschema:
+    id: org.gnome.desktop.peripherals.touchpad
+    filename: zz0-05-touchpad.gschema.override
+    settings:
+      click-method: 'default'
+      tap-and-drag-lock: true
+      two-finger-scrolling-enabled: false
+      edge-scrolling-enabled: true
+
+- gschema:
+    id: org.gnome.Ptyxis
+    filename: zz0-06-ptyxis.gschema.override
+    settings:
+      interface-style: 'system'
+      restore-session: false
+
+- path: /etc/dconf/db/local.d/00-blurmyshell-panel
   content: |
-    [Lenovo Ideapad Gaming 3]
-    MatchUdevType=keyboard
-    MatchVendor=0x048D
-    MatchProduct=0xC976
-    AttrKeyboardIntegration=internal
+    [org/gnome/shell/extensions/blur-my-shell/panel]
+    blur=false
 
-- path: /usr/lib/tuned/profiles/throughput-performance-bazzite/tuned.conf
+- path: /etc/dconf/db/local.d/01-blurmyshell-overview
   content: |
-    #
-    # tuned configuration
-    #
+    [org/gnome/shell/extensions/blur-my-shell/overview]
+    style-components=3
 
-    [main]
-    summary = General non-specialized tuned profile with added Bazzite tweaks
-    include = throughput-performance
-
-    [audio]
-    # See 17c869d
-    timeout=0
-
-    [sysctl]
-    # The swappiness parameter controls the tendency of the kernel to move
-    # processes out of physical memory and onto the swap disk.
-    # 0 tells the kernel to avoid swapping processes out of physical memory
-    # for as long as possible
-    # 100 tells the kernel to aggressively swap processes out of physical memory
-    # and move them to swap cache
-    vm.swappiness = 180
-
-    vm.watermark_boost_factor = 0
-    vm.watermark_scale_factor = 125
-    vm.dirty_bytes = 268435456
-    vm.dirty_background_bytes = 134217728
-    vm.page-cluster = 0
-
-- path: /usr/lib/tuned/profiles/balanced-bazzite/tuned.conf
+- path: /etc/dconf/db/local.d/02-just-perfection
   content: |
-    #
-    # tuned configuration
-    #
+    [org/gnome/shell/extensions/just-perfection]
+    workspace-wrap-around=true
 
-    [main]
-    summary = General non-specialized tuned profile with added Bazzite tweaks
-    include = balanced
-
-    [audio]
-    # See 17c869d
-    timeout=0
-
-    [sysctl]
-    # The swappiness parameter controls the tendency of the kernel to move
-    # processes out of physical memory and onto the swap disk.
-    # 0 tells the kernel to avoid swapping processes out of physical memory
-    # for as long as possible
-    # 100 tells the kernel to aggressively swap processes out of physical memory
-    # and move them to swap cache
-    vm.swappiness = 180
-
-    vm.watermark_boost_factor = 0
-    vm.watermark_scale_factor = 125
-    vm.dirty_bytes = 268435456
-    vm.dirty_background_bytes = 134217728
-    vm.page-cluster = 0
-
-- path: /usr/lib/tuned/profiles/balanced-battery-bazzite/tuned.conf
+- path: /etc/dconf/db/local.d/03-appfolders
   content: |
-    #
-    # tuned configuration
-    #
+    [org/gnome/desktop/app-folders]
+    folder-children=['AudioVideo', 'Development', 'Education', 'Games', 'Graphics', 'Network', 'Office', 'Science', 'Settings', 'System', 'Utilities', 'Wine']
 
-    [main]
-    summary = Balanced profile biased towards power savings changes for battery with added Bazzite tweaks
-    include = balanced-bazzite
+    [org/gnome/desktop/app-folders/folders/AudioVideo]
+    name='Audio & Video'
+    categories=['AudioVideo']
 
-    [cpu]
-    energy_performance_preference=balance_power
-    boost=1
+    [org/gnome/desktop/app-folders/folders/Development]
+    name='Development'
+    categories=['Development']
 
-    [audio]
-    timeout=10
+    [org/gnome/desktop/app-folders/folders/Education]
+    name='Education'
+    categories=['Education']
 
-    [video]
-    panel_power_savings=1
+    [org/gnome/desktop/app-folders/folders/Games]
+    name='Games'
+    categories=['Game']
 
-- path: /etc/pipewire/pipewire.conf.d/virtual-channels.conf
+    [org/gnome/desktop/app-folders/folders/Graphics]
+    name='Graphics'
+    categories=['Graphics']
+
+    [org/gnome/desktop/app-folders/folders/Network]
+    name='Internet'
+    categories=['Network']
+
+    [org/gnome/desktop/app-folders/folders/Office]
+    name='Office'
+    categories=['Office']
+
+    [org/gnome/desktop/app-folders/folders/Science]
+    name='Science'
+    categories=['Science']
+
+    [org/gnome/desktop/app-folders/folders/Settings]
+    name='Settings'
+    categories=['Settings']
+
+    [org/gnome/desktop/app-folders/folders/System]
+    name='System'
+    categories=['System']
+
+    [org/gnome/desktop/app-folders/folders/Utilities]
+    name='Utilities'
+    categories=['Utility']
+
+    [org/gnome/desktop/app-folders/folders/Wine]
+    name='Wine'
+    categories=['X-Wine']
+
+- path: /etc/dconf/profile/user
   content: |
-    context.modules = [
-        { name = libpipewire-module-loopback
-            args = {
-                node.description = "Game"
-                capture.props = {
-                    node.name      = "game_output"
-                    media.class    = "Audio/Sink"
-                    audio.position = [ FL FR ]
-                }
-                playback.props = {
-                    node.name      = "playback.game_output"
-                    audio.position = [ FL FR ]
-                    node.passive   = true
-                }
-            }
-        }
-        { name = libpipewire-module-loopback
-            args = {
-                node.description = "Voice"
-                capture.props = {
-                    node.name      = "voice_output"
-                    media.class    = "Audio/Sink"
-                    audio.position = [ FL FR ]
-                }
-                playback.props = {
-                    node.name      = "playback.voice_output"
-                    audio.position = [ FL FR ]
-                    node.passive   = true
-                }
-            }
-        }
-        { name = libpipewire-module-loopback
-            args = {
-                node.description = "Browser"
-                capture.props = {
-                    node.name      = "browser_output"
-                    media.class    = "Audio/Sink"
-                    audio.position = [ FL FR ]
-                }
-                playback.props = {
-                    node.name      = "playback.browser_output"
-                    audio.position = [ FL FR ]
-                    node.passive   = true
-                }
-            }
-        }
-        { name = libpipewire-module-loopback
-            args = {
-                node.description = "Music"
-                capture.props = {
-                    node.name      = "music_output"
-                    media.class    = "Audio/Sink"
-                    audio.position = [ FL FR ]
-                }
-                playback.props = {
-                    node.name      = "playback.music_output"
-                    audio.position = [ FL FR ]
-                    node.passive   = true
-                }
-            }
-        }
-    ]
+    user-db:user
+    system-db:local
 
-- path: /usr/lib/systemd/user/opentabletdriver.service
+# Allow writing conservation_mode without sudo password
+- path: /etc/sudoers.d/ideapad
   content: |
-    [Unit]
-    Description=OpenTabletDriver Daemon
-    PartOf=graphical-session.target
-    After=graphical-session.target
-    ConditionEnvironment=|WAYLAND_DISPLAY
-    ConditionEnvironment=|DISPLAY
+    %wheel ALL=(ALL) NOPASSWD: /usr/bin/tee /sys/bus/platform/drivers/ideapad_acpi/VPC2004\:00/conservation_mode
 
-    [Service]
-    ExecStart=otd-daemon
-    Restart=always
-    RestartSec=3
-
-    [Install]
-    WantedBy=graphical-session.target
-
-- path: /etc/greetd/config.toml
+- path: /etc/modules
   content: |
-    [terminal]
-    vt = 1
+    ideapad_laptop
 
-    [default_session]
-    user = "greeter"
-    command = "dms-greeter --command niri"
-
+# To allow old controllers to connect
 - path: /etc/modprobe.d/disable-ertm.conf
   content: |
     options bluetooth disable_ertm=Y

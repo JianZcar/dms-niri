@@ -21,6 +21,7 @@ PKGS_TO_INSTALL=(
     fedora-release-ostree-desktop
     flatpak
 
+    gnome-software
     ptyxis
     nautilus
     morewaita-icon-theme
@@ -38,9 +39,17 @@ PKGS_TO_INSTALL=(
 )
 
 PKGS_TO_UNINSTALL=(
+    gnome-classic-session
+    gnome-tour
+    gnome-initial-setup
 )
 
-dnf5 -y install "${PKGS_TO_INSTALL[@]}"
-# dnf5 -y remove "${PKGS_TO_UNINSTALL[@]}"
 
+dnf5 -y install "${PKGS_TO_INSTALL[@]}"
+
+dnf install niri --setopt=install_weak_deps=False
+
+dnf5 -y remove "${PKGS_TO_UNINSTALL[@]}"
+
+systemctl set-default graphical.target
 echo "::endgroup::"
