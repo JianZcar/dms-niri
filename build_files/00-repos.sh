@@ -10,6 +10,7 @@ mkdir -p /var/roothome
 dnf5 -y install dnf5-plugins
 
 COPRS=(
+    yalter/niri
     trixieua/morewaita-icon-theme
     che/nerd-fonts
 )
