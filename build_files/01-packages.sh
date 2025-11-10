@@ -38,6 +38,8 @@ PKGS_TO_INSTALL=(
     gvfs-gphoto2
 
     dms
+    greetd
+    greetd-selinux
     dms-greeter
     accountsservice
 )
