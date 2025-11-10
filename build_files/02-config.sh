@@ -12,7 +12,8 @@ cat <<'EOF' > /etc/systemd/system/dms.service.d/override.conf
 ConditionUser=!greeter
 EOF
 
-loginctl enable-linger greeter
+mkdir -p /var/lib/systemd/linger
+touch /var/lib/systemd/linger/greeter
 
 echo "debugging"
 cat /etc/pam.d/greetd
