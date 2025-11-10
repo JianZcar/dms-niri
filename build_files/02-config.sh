@@ -6,17 +6,10 @@ set -ouex pipefail
 
 /ctx/helper/config-apply.sh
 
-mkdir -p /etc/systemd/system/dms.service.d
-cat <<'EOF' > /etc/systemd/system/dms.service.d/override.conf
-[Unit]
-ConditionUser=!greeter
-EOF
-
-mkdir -p /etc/systemd/system/user@.service.d
-tee /etc/systemd/system/user@.service.d/skip-greeter.conf > /dev/null <<'EOF'
-[Unit]
-ConditionUser=!greeter
-EOF
+grep -E '^greetd:' /usr/etc/passwd | tee -a /etc/passwd
+grep -E '^greeter:' /usr/etc/passwd | tee -a /etc/passwd
+grep -E '^greetd:' /usr/etc/group | tee -a /etc/group
+grep -E '^greeter:' /usr/etc/group | tee -a /etc/group
 
 echo "debugging"
 cat /etc/pam.d/greetd
