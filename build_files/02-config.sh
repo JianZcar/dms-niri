@@ -6,11 +6,6 @@ set -ouex pipefail
 
 /ctx/helper/config-apply.sh
 
-grep -E '^greetd:' /usr/etc/passwd | tee -a /etc/passwd
-grep -E '^greeter:' /usr/etc/passwd | tee -a /etc/passwd
-grep -E '^greetd:' /usr/etc/group | tee -a /etc/group
-grep -E '^greeter:' /usr/etc/group | tee -a /etc/group
-
 echo "debugging"
 cat /etc/pam.d/greetd
 getent passwd greeter
