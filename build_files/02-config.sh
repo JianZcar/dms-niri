@@ -12,13 +12,11 @@ cat <<'EOF' > /etc/systemd/system/dms.service.d/override.conf
 ConditionUser=!greeter
 EOF
 
-sudo mkdir -p /etc/systemd/system/user@.service.d
-sudo tee /etc/systemd/system/user@.service.d/skip-greeter.conf > /dev/null <<'EOF'
+mkdir -p /etc/systemd/system/user@.service.d
+tee /etc/systemd/system/user@.service.d/skip-greeter.conf > /dev/null <<'EOF'
 [Unit]
 ConditionUser=!greeter
 EOF
-
-sudo systemctl daemon-reload
 
 echo "debugging"
 cat /etc/pam.d/greetd
