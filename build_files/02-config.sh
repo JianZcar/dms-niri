@@ -18,10 +18,6 @@ tee /etc/systemd/system/user@.service.d/skip-greeter.conf > /dev/null <<'EOF'
 ConditionUser=!greeter
 EOF
 
-useradd -m -d /var/lib/greeter -s /bin/bash greeter
-passwd -l greeter
-chown -R greeter:greeter /var/lib/greeter
-
 echo "debugging"
 cat /etc/pam.d/greetd
 getent passwd greeter
