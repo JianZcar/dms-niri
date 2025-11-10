@@ -6,6 +6,7 @@ set -ouex pipefail
 
 services=(
     podman.socket
+    greetd
 )
 
 disable_services=(

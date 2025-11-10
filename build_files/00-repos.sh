@@ -10,6 +10,9 @@ mkdir -p /var/roothome
 dnf5 -y install dnf5-plugins
 
 COPRS=(
+    avengemedia/dms
+    avengemedia/danklinux
+    errornointernet/quickshell
     yalter/niri
     ulysg/xwayland-satellite
     trixieua/morewaita-icon-theme

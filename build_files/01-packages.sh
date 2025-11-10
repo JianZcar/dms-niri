@@ -36,6 +36,10 @@ PKGS_TO_INSTALL=(
     libmtp
     gvfs-mtp
     gvfs-gphoto2
+
+    dms
+    dms-greeter
+    accountsservice
 )
 
 PKGS_TO_UNINSTALL=(
