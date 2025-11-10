@@ -6,6 +6,8 @@ set -ouex pipefail
 
 /ctx/helper/config-apply.sh
 
+usermod -aG video,input,render greeter
+
 echo "debugging"
 cat /etc/pam.d/greetd
 getent passwd greeter
