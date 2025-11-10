@@ -6,6 +6,11 @@ set -ouex pipefail
 
 /ctx/helper/config-apply.sh
 
+echo "debugging"
+cat /etc/pam.d/greetd
+getent passwd greeter
+groups greeter
+
 sed -i 's/^#AutomaticUpdatePolicy=none/AutomaticUpdatePolicy=stage/' /etc/rpm-ostreed.conf
 sed -i 's/^#LockLayering=false/LockLayering=true/' /etc/rpm-ostreed.conf
 sed -i 's/#UserspaceHID.*/UserspaceHID=true/' /etc/bluetooth/input.conf
