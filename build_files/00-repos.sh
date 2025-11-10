@@ -11,6 +11,7 @@ dnf5 -y install dnf5-plugins
 
 COPRS=(
     yalter/niri
+    ulysg/xwayland-satellite
     trixieua/morewaita-icon-theme
     che/nerd-fonts
 )
