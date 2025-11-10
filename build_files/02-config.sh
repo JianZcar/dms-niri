@@ -6,8 +6,6 @@ set -ouex pipefail
 
 /ctx/helper/config-apply.sh
 
-useradd -m -s /usr/bin/nologin greeter
-
 sed -i 's/^#AutomaticUpdatePolicy=none/AutomaticUpdatePolicy=stage/' /etc/rpm-ostreed.conf
 sed -i 's/^#LockLayering=false/LockLayering=true/' /etc/rpm-ostreed.conf
 sed -i 's/#UserspaceHID.*/UserspaceHID=true/' /etc/bluetooth/input.conf
