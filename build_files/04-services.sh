@@ -24,11 +24,12 @@ mask_services=(
 )
 
 user_services=(
+    dms.service
 )
 
 systemctl enable "${services[@]}"
 # systemctl disable "${disable_services[@]}"
 systemctl mask "${mask_services[@]}"
-# systemctl --global enable "${user_services[@]}"
+systemctl --global enable "${user_services[@]}"
 
 echo "::endgroup::"
