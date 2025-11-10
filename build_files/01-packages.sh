@@ -44,7 +44,7 @@ PKGS_TO_UNINSTALL=(
 
 dnf5 -y install "${PKGS_TO_INSTALL[@]}"
 
-dnf install niri --setopt=install_weak_deps=False
+dnf5 install niri --setopt=install_weak_deps=False
 
 # dnf5 -y remove "${PKGS_TO_UNINSTALL[@]}"
 
