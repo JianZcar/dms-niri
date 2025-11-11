@@ -21,6 +21,10 @@ PKGS_TO_INSTALL=(
     fedora-release-ostree-desktop
     flatpak
 
+    ddcutil # DDC/CI control for monitors
+    iwd # iNet Wireless Daemon
+    libcec # HDMI CEC library
+
     gnome-software
     ptyxis
     nautilus
