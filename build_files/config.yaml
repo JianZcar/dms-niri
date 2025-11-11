@@ -5,7 +5,7 @@
 
     [default_session]
     user = "greeter"
-    command = "dms-greeter --command niri"
+    command = "/bin/dms-greeter --command niri"
 
 - path: /etc/dconf/profile/user
   content: |
